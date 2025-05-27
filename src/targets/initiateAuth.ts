@@ -172,6 +172,9 @@ const userPasswordAuthFlow = async (
   if (!user) {
     throw new NotAuthorizedError();
   }
+  if (user.Enabled === false) {
+    throw new NotAuthorizedError();
+  }
   if (user.UserStatus === "RESET_REQUIRED") {
     throw new PasswordResetRequiredError();
   }
